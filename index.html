@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Updated System</title>
     <style>
         body {
@@ -120,6 +123,17 @@ button:hover {
     </div>
 
     <script>
+    // Função para verificar se o usuário está autenticado
+    function checkAuthentication() {
+        if (sessionStorage.getItem('userLoggedIn')) {
+            window.location.href = 'Pages/start.html'; // Caminho para a página principal
+        }
+    }
+
+    // Chama a função para verificar a autenticação quando a página carrega
+    document.addEventListener('DOMContentLoaded', checkAuthentication);
+
+    // Adiciona o evento de clique ao botão de login
     document.getElementById('loginBtn').addEventListener('click', async () => {
         const usuario = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
