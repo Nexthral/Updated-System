@@ -118,43 +118,45 @@ button:hover {
     <div class="footer">
         &copy; org dynamo optimizations
     </div>
+
     <script>
-        document.getElementById('loginBtn').addEventListener('click', async () => {
-    const usuario = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const errorMsg = document.getElementById('errorMsg');
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+        const usuario = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const errorMsg = document.getElementById('errorMsg');
 
-    // Verifica se os campos estão preenchidos
-    if (!usuario || !password) {
-        errorMsg.textContent = 'Por favor, preencha todos os campos.';
-        return;
-    }
-
-    try {
-        // Faz a requisição para o arquivo JSON hospedado no GitHub
-        const response = await fetch('https://nexthral.github.io/Meu-app/account.json');
-        
-        // Converte a resposta para JSON
-        const data = await response.json();
-
-        // Procura pelo usuário no JSON
-        const user = data.users.find(user => user.usuario === usuario && user.password === password);
-
-        if (user) {
-            // Se o usuário for encontrado, cria um item temporário no sessionStorage
-            sessionStorage.setItem('userLoggedIn', 'true');
-
-            // Redireciona para a página start.html
-            window.location.href = "Pages/start.html";
-        } else {
-            // Se o usuário ou a senha estiverem incorretos, exibe uma mensagem de erro
-            errorMsg.textContent = 'Usuário ou senha incorretos.';
+        // Verifica se os campos estão preenchidos
+        if (!usuario || !password) {
+            errorMsg.textContent = 'Por favor, preencha todos os campos.';
+            return;
         }
-    } catch (error) {
-        // Caso ocorra algum erro durante a autenticação, exibe uma mensagem de erro
-        errorMsg.textContent = `Erro ao autenticar: ${error.message}`;
-    }
-});
+
+        try {
+            // Faz a requisição para o arquivo JSON hospedado no GitHub
+            const response = await fetch('https://nexthral.github.io/Meu-app/account.json');
+            
+            // Converte a resposta para JSON
+            const data = await response.json();
+
+            // Procura pelo usuário no JSON
+            const user = data.users.find(user => user.usuario === usuario && user.password === password);
+
+            if (user) {
+                // Se o usuário for encontrado, cria um item temporário no sessionStorage
+                sessionStorage.setItem('userLoggedIn', 'true');
+                sessionStorage.setItem('userId', user.id); // Armazena o ID do usuário também no sessionStorage
+
+                // Redireciona para a página start.html
+                window.location.href = "Pages/start.html";
+            } else {
+                // Se o usuário ou a senha estiverem incorretos, exibe uma mensagem de erro
+                errorMsg.textContent = 'Usuário ou senha incorretos.';
+            }
+        } catch (error) {
+            // Caso ocorra algum erro durante a autenticação, exibe uma mensagem de erro
+            errorMsg.textContent = `Erro ao autenticar: ${error.message}`;
+        }
+    });
     </script>
 </body>
 </html>
