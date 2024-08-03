@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Updated System</title>
+    <style>
+        /* Estilos para a página start.html */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+    position: relative;
+    user-select: none; /* Impede seleção de texto */
+    -webkit-user-select: none; /* Para navegadores baseados em WebKit */
+    -ms-user-select: none; /* Para o Internet Explorer/Edge */
+    touch-action: manipulation; /* Previne zoom em dispositivos touch */
+    overscroll-behavior: none; /* Previne "overscroll" */
+}
+
+/* Não permitir CRTL C */
+body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.header {
+    position: absolute;
+    top: 22px; /* Ajuste conforme necessário */
+    left: 15px; /* Ajuste conforme necessário */
+    display: flex;
+    align-items: center;
+    color: #FFA500; /* Cor laranja */
+    font-family: 'Arial', sans-serif; /* Fonte moderna e agradável */
+    font-size: 34px; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+}
+
+.header-icon {
+    width: 30px; /* Ajuste o tamanho do ícone conforme necessário */
+    height: 30px; /* Ajuste o tamanho do ícone conforme necessário */
+    margin-right: 10px; /* Espaço entre o ícone e o texto */
+}
+
+.header-text {
+    line-height: 30px; /* Alinha verticalmente com o ícone */
+}
+
+.widget {
+    position: absolute;
+    top: 10px; /* Alinhado verticalmente com o LABS */
+    right: 10px; /* Alinhado à direita */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.widget-icon {
+    width: 50px; /* Ajuste o tamanho do ícone conforme necessário */
+    height: 50px; /* Ajuste o tamanho do ícone conforme necessário */
+    border-radius: 50%; /* Faz o ícone circular */
+    border: 1px solid #FFA500; /* Borda laranja ao redor do ícone */
+}
+
+.footer-container {
+    position: fixed; /* Mantenha o rodapé fixo na parte inferior da página */
+    bottom: 40px; /* Distância da parte inferior da página */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Ajusta o alinhamento para centralizar o container */
+    max-width: 240px; /* Largura máxima ajustada */
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo branco transparente */
+    border-radius: 20px; /* Bordas arredondadas em todos os cantos */
+    padding: 10px; /* Espaço interno ajustado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra opcional */
+    text-align: center; /* Alinha o texto ao centro */
+    min-height: 40px; /* Altura mínima ajustada */
+    display: flex;
+    align-items: center; /* Centraliza verticalmente o conteúdo */
+    justify-content: space-around; /* Espaça os ícones horizontalmente com menor espaçamento */
+    transition: opacity 0.3s ease-in-out; /* Animação suave para ocultar e mostrar */
+    opacity: 1; /* Inicialmente visível */
+}
+
+.footer-container img {
+    width: 30px; /* Tamanho dos ícones */
+    height: 30px; /* Tamanho dos ícones */
+    margin: 0 8px; /* Espaço entre os ícones */
+    pointer-events
+}
+
+/* Container do bot */
+.content-container {
+    position: absolute;
+    top: 75px; /* Espaço abaixo do header */
+    left: 15px; /* Ajuste a distância da esquerda */
+    right: 15px; /* Ajuste a distância da direita */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 20px; /* Bordas arredondadas nos cantos superiores e inferiores */
+    height: 150px; /* Altura do container (pode ser ajustada conforme necessário) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra opcional */
+}
+
+.widget-inside-container {
+    position: absolute;
+    top: 18px; /* Distância do topo dentro do container */
+    left: 18px; /* Distância da esquerda dentro do container */
+    width: auto; /* Deixa a largura automática para acomodar o texto */
+    height: 110px; /* Altura do widget */
+    display: flex;
+    align-items: center;
+}
+
+.bot-icon {
+    width: 60px; /* Ajuste o tamanho do ícone conforme necessário */
+    height: 60px; /* Ajuste o tamanho do ícone conforme necessário */
+    border-radius: 50%; /* Faz o ícone circular */
+    border: 1px solid #FFA500; /* Borda laranja ao redor do widget */
+}
+
+.bot-text-container {
+    margin-left: 20px; /* Espaçamento entre o ícone e o texto */
+    color: #fff; /* Cor do texto branco */
+    font-family: 'Arial', sans-serif; /* Fonte do texto */
+    text-align: center; /* Centraliza o texto */
+}
+
+.bot-title {
+    font-size: 20px; /* Tamanho da fonte do título */
+    font-weight: bold; /* Negrito para o título */
+    display: block; /* Garante que o título ocupe uma linha inteira */
+}
+
+.bot-subtitle {
+    font-size: 16px; /* Tamanho da fonte do subtítulo */
+    display: block; /* Garante que o subtítulo ocupe uma linha inteira */
+    margin-top: 4px; /* Pequeno espaçamento entre o título e o subtítulo */
+}
+
+/* Cor do Telegram */
+.telegram-highlight {
+    color: #0088cc; /* Cor do Telegram */
+}
+
+/* botão interativo */
+.bot-button-container {
+    position: relative;
+    margin-top: -5px;
+    top: 25px; /* Move o botão para baixo */
+    display: flex;
+    justify-content: center; /* Centraliza o botão */
+}
+
+.bot-interact-button {
+    background: linear-gradient(45deg, #0088cc, #00bfff); /* Gradiente nas cores do Telegram */
+    color: #fff; /* Cor do texto branco */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    text-decoration: none; /* Remove o sublinhado do link */
+    border-radius: 8px; /* Bordas arredondadas disfarçadas */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Arial', sans-serif; /* Fonte do botão */
+    font-weight: bold; /* Negrito */
+    transition: transform 0.2s ease-in-out; /* Animação suave ao clicar */
+}
+
+.bot-interact-button:hover {
+    transform: scale(1.05); /* Aumenta ligeiramente o botão ao passar o mouse */
+}
+
+.bot-interact-button:active {
+    transform: scale(0.95); /* Suave animação de click */
+}
+
+/* Shopping container*/
+.shopping-container {
+    position: relative;
+    top: 33px;
+    right: 102px;
+    margin-top: 20px; /* Espaço entre o contêiner acima */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.shopping-widget {
+    width: 80px; /* Largura do widget */
+    height: 80px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.shop-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.shopping-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+.shopping-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.shopping-widget {
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.shopping-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+/* Estilo do widget files */
+.files-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -70px;
+    right: 2px;
+}
+
+.files-widget {
+    width: 80px; /* Largura do widget */
+    height: 80px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.files-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.files-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.files-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget pay */
+.pay-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -174px;
+    right: -98px;
+}
+
+.pay-widget {
+    width: 80px; /* Largura do widget */
+    height: 80px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.pay-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.pay-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.pay-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget do help */
+.help-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -90px;
+    position: relative;
+    top: -60px;
+    right: 102px;
+}
+
+.help-widget {
+    width: 80px; /* Largura do widget */
+    height: 80px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.help-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.help-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.help-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget do grupo */
+.group-container {
+    margin-top: -100px; /* Espaço entre a linha de widgets acima e o novo widget */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -64px;
+    right: 2px;
+}
+
+.group-link {
+    text-decoration: none; /* Remove o sublinhado do link */
+}
+
+.group-widget {
+    width: 80px; /* Largura do widget */
+    height: 80px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.group-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.group-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.group-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget do more/mais */
+.more-container {
+    margin-top: -110px; /* Espaço entre a linha de widgets acima e o novo widget */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -58px;
+    right: -98px;
+}
+
+.more-link {
+    text-decoration: none; /* Remove o sublinhado do link */
+}
+
+.more-widget {
+    width: 80px; /* Largura do widget */
+    height: 80px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.more-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.more-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.more-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* segundo container */
+.bottom-container {
+    position: absolute;
+    top: 500px; /* Espaço abaixo do header */
+    left: 15px; /* Ajuste a distância da esquerda */
+    right: 15px; /* Ajuste a distância da direita */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 20px; /* Bordas arredondadas nos cantos superiores e inferiores */
+    height: 150px; /* Altura do container (pode ser ajustada conforme necessário) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra opcional */
+}
+
+.game-icon {
+    width: 250px; /* Ajuste o tamanho da imagem conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+    position: absolute;
+    left: -65px; /* Espaço da borda esquerda do container */
+    top: -26px;
+}
+
+.bottom-content {
+    margin-left: 105px; /* Ajusta a margem para deixar espaço para a imagem */
+    color: #FFA500; /* Cor laranja */
+    font-family: 'Arial', sans-serif; /* Fonte do texto */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+.bottom-title {
+    font-size: 24px; /* Tamanho da fonte do título */
+    font-weight: bold; /* Negrito para o título */
+    margin-bottom: 10px; /* Espaço entre o título e o subtítulo */
+}
+
+.bottom-subtitle {
+    font-size: 16px; /* Tamanho da fonte do subtítulo */
+    color: #fff; /* Cor do subtítulo em branco */
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="img/labs.png" alt="Labs Icon" class="header-icon">
+        <span class="header-text">LABS</span>
+    </div>
+    <div class="widget">
+        <img src="img/logo.png" alt="Logo" class="widget-icon">
+    </div>
+    <div class="content-container">
+        <!-- Conteúdo do container pode ser adicionado aqui -->
+        <div class="widget-inside-container">
+            <img src="img/bot.png" alt="Bot Icon" class="bot-icon">
+            <div class="bot-text-container">
+                <span class="bot-title">DYNAMO BOT</span>
+                <span class="bot-subtitle">Nosso parceiro no <span class="telegram-highlight">Telegram</span></span>
+                <div class="bot-button-container">
+                    <a href="https://t.me/DyynamoBot" class="bot-interact-button">Interagir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="shopping-files-container">
+        <div class="shopping-container">
+            <a href="shopping.html" class="shopping-link">
+                <div class="shopping-widget">
+                    <img src="img/shop.png" alt="Shopping Icon" class="shop-icon">
+                </div>
+            </a>
+            <div class="shopping-title">Shopping</div>
+        </div>
+
+        <div class="files-container">
+            <a href="files.html" class="files-link">
+                <div class="files-widget">
+                    <img src="img/files.png" alt="Files Icon" class="files-icon">
+                </div>
+            </a>
+            <div class="files-title">Files</div>
+        </div>
+        <div class="pay-container">
+            <a href="pay.html" class="pay-link">
+                <div class="pay-widget">
+                    <img src="img/pay.png" alt="Pay Icon" class="pay-icon">
+                </div>
+            </a>
+            <div class="pay-title">Pay</div>
+        </div>
+    </div>
+
+    <div class="help-container">
+        <a href="help.html" class="help-link">
+            <div class="help-widget">
+                <img src="img/help2.png" alt="Help Icon" class="help-icon">
+            </div>
+        </a>
+        <div class="help-title">Help</div>
+    </div>
+  
+    <div class="group-container">
+        <a href="group.html" class="group-link">
+            <div class="group-widget">
+                <img src="img/group2.png" alt="Group Icon" class="group-icon">
+            </div>
+        </a>
+        <div class="group-title">Group</div>
+    </div>
+
+    <div class="more-container">
+        <a href="more.html" class="more-link">
+            <div class="more-widget">
+                <img src="img/more.png" alt="More Icon" class="more-icon">
+            </div>
+        </a>
+        <div class="more-title">More</div>
+    </div>
+
+    <div class="bottom-container">
+        <img src="img/game.png" alt="Game Icon" class="game-icon">
+        <div class="bottom-content">
+            <div class="bottom-title">DIGA ADEUS AO ANDROID LENTO</div>
+            <div class="bottom-subtitle">Não se contente com um desempenho abaixo do ideal</div>
+            <div class="bottom-subtitle">na era da otimização.</div>
+        </div>
+    </div>
+    
+    <div class="footer-container">
+    <a href="start.html">
+        <img src="img/home.png" alt="Home Icon">
+    </a>
+    <a href="group.html">
+        <img src="img/group.png" alt="Group Icon">
+    </a>
+    <a href="help.html">
+        <img src="img/help.png" alt="Help Icon">
+    </a>
+    <a href="settings.html">
+        <img src="img/settings.png" alt="Settings Icon">
+    </a>
+</div>
+    
+   <script>
+    // script.js para start.html
+
+    // Função para verificar se o usuário está autenticado
+    function checkAuthentication() {
+        if (!sessionStorage.getItem('userLoggedIn')) {
+            window.location.href = '../index.html'; // Caminho correto para index.html na raiz
+        }
+    }
+
+    // Chama a função para verificar a autenticação quando a página carrega
+    document.addEventListener('DOMContentLoaded', checkAuthentication);
+    
+    // Adiciona a funcionalidade de remover e exibir o rodapé ao rolar
+    let lastScrollTop = 0;
+    const footer = document.querySelector('.footer-container');
+
+    window.addEventListener('scroll', function() {
+        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScroll > lastScrollTop) {
+            // Rolando para baixo
+            footer.style.opacity = '0'; // Torna o rodapé invisível
+            setTimeout(() => {
+                footer.style.display = 'none'; // Remove o rodapé da página após animação
+            }, 300); // Tempo da animação
+        } else {
+            // Rolando para cima
+            footer.style.display = 'flex'; // Adiciona o rodapé de volta à página
+            footer.style.opacity = '1'; // Torna o rodapé visível
+        }
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Para rolagem negativa
+    });
+</script>
+</body>
+</html>
