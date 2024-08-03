@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updated System</title>
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    display: flex;
+    flex-direction: column; /* Permite alinhar itens verticalmente */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+    position: relative;
+}
+
+/* Impedir zoom */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+    position: relative;
+    user-select: none; /* Impede seleção de texto */
+    -webkit-user-select: none; /* Para navegadores baseados em WebKit */
+    -ms-user-select: none; /* Para o Internet Explorer/Edge */
+    touch-action: manipulation; /* Previne zoom em dispositivos touch */
+    overscroll-behavior: none; /* Previne "overscroll" */
+}
+
+/* Prevenir zoom ao fazer gesto de pinça ou toque duplo em dispositivos móveis */
+html, body {
+    touch-action: none;
+}
+
+/* Impedir cópia de conteúdo */
+body {
+    -webkit-touch-callout: none; /* Para iOS */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container {
+    text-align: center;
+}
+
+.logo {
+    width: 250px; /* Tamanho da logo */
+    margin-bottom: -10px; /* Espaço abaixo da logo */
+    margin-top: -150px; /* Move a logo mais para cima */
+}
+
+input[type="text"], input[type="password"] {
+    display: block;
+    width: 280px;
+    margin: 15px auto;
+    padding: 10px;
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    border-radius: 5px;
+    background-color: #222;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+button {
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
+    padding: 10px;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+.footer {
+    position: absolute;
+    bottom: 10px;
+    left: 0; /* Garantir que o elemento comece do lado esquerdo */
+    right: 0; /* Garantir que o elemento vá até o lado direito */
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    text-align: center;
+}
+
+#error-message {
+    margin-top: 10px;
+    font-size: 14px;
+    color: red;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="img/icon.png" alt="Logo da Empresa" class="logo">
+        <input type="text" id="username" placeholder="Usuário" required>
+        <input type="password" id="password" placeholder="Senha" required>
+        <button id="loginBtn">Entrar</button>
+        <p id="errorMsg" style="color:red;"></p>
+    </div>
+    <div class="footer">
+        &copy; org dynamo optimizations
+    </div>
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', async () => {
+    const usuario = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const errorMsg = document.getElementById('errorMsg');
+
+    // Verifica se os campos estão preenchidos
+    if (!usuario || !password) {
+        errorMsg.textContent = 'Por favor, preencha todos os campos.';
+        return;
+    }
+
+    try {
+        // Faz a requisição para o arquivo JSON hospedado no GitHub
+        const response = await fetch('https://nexthral.github.io/Meu-app/account.json');
+        
+        // Converte a resposta para JSON
+        const data = await response.json();
+
+        // Procura pelo usuário no JSON
+        const user = data.users.find(user => user.usuario === usuario && user.password === password);
+
+        if (user) {
+            // Se o usuário for encontrado, cria um item temporário no sessionStorage
+            sessionStorage.setItem('userLoggedIn', 'true');
+
+            // Redireciona para a página start.html
+            window.location.href = "Pages/start.html";
+        } else {
+            // Se o usuário ou a senha estiverem incorretos, exibe uma mensagem de erro
+            errorMsg.textContent = 'Usuário ou senha incorretos.';
+        }
+    } catch (error) {
+        // Caso ocorra algum erro durante a autenticação, exibe uma mensagem de erro
+        errorMsg.textContent = `Erro ao autenticar: ${error.message}`;
+    }
+});
+    </script>
+</body>
+</html>
