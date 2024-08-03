@@ -611,6 +611,7 @@ body {
 
         if (currentScroll > lastScrollTop) {
             // Rolando para baixo
+            footer.style.transition = 'opacity 0.3s'; // Adiciona a transição para a opacidade
             footer.style.opacity = '0'; // Torna o rodapé invisível
             setTimeout(() => {
                 footer.style.display = 'none'; // Remove o rodapé da página após animação
@@ -622,6 +623,6 @@ body {
         }
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Para rolagem negativa
     });
-</script>
+   </script>
 </body>
 </html>
