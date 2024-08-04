@@ -102,13 +102,18 @@ body {
     top: 75px; /* Espaço abaixo do header */
     left: 15px; /* Ajuste a distância da esquerda */
     right: 15px; /* Ajuste a distância da direita */
-    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    background-image: url('img/wallpaper.png'); /* Adiciona o fundo do papel de parede */
+    background-size: cover; /* Ajusta o fundo para cobrir todo o container */
+    background-position: center; /* Centraliza o fundo */
+    background-repeat: no-repeat; /* Impede a repetição do fundo */
     border-radius: 20px; /* Bordas arredondadas nos cantos superiores e inferiores */
     height: 150px; /* Altura do container (pode ser ajustada conforme necessário) */
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra opcional */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra mais intensa para efeito 3D */
+    transform: perspective(1000px) rotateX(3deg) rotateY(3deg); /* Adiciona efeito 3D */
+    z-index: 10; /* Garante que o container fique acima dos outros elementos */
 }
 
 .widget-inside-container {
@@ -119,13 +124,6 @@ body {
     height: 110px; /* Altura do widget */
     display: flex;
     align-items: center;
-}
-
-.bot-icon {
-    width: 60px; /* Ajuste o tamanho do ícone conforme necessário */
-    height: 60px; /* Ajuste o tamanho do ícone conforme necessário */
-    border-radius: 50%; /* Faz o ícone circular */
-    border: 1px solid #FFA500; /* Borda laranja ao redor do widget */
 }
 
 .bot-text-container {
@@ -179,7 +177,7 @@ body {
 
 .bot-interact-button:active {
     transform: scale(0.95); /* Suave animação de click */
-}
+    }
 
 /* Shopping container*/
 .shopping-container {
@@ -496,18 +494,18 @@ body {
     <div class="widget">
         <img src="img/logo.png" alt="Logo" class="widget-icon">
     </div>
+
     <div class="content-container">
-        <!-- Conteúdo do container pode ser adicionado aqui -->
-        <div class="widget-inside-container">
-            <img src="img/bot.png" alt="Bot Icon" class="bot-icon">
-            <div class="bot-text-container">
-                <span class="bot-title">DYNAMO BOT</span>
-                <span class="bot-subtitle">Nosso parceiro no <span class="telegram-highlight">Telegram</span></span>
-                <div class="bot-button-container">
-                    <a href="https://t.me/DyynamoBot" class="bot-interact-button">Interagir</a>
-                </div>
+      <div class="widget-inside-container">
+        <!-- O ícone foi removido -->
+        <div class="bot-text-container">
+            <span class="bot-title">DYNAMO BOT</span>
+            <span class="bot-subtitle">Nosso parceiro no <span class="telegram-highlight">Telegram</span></span>
+            <div class="bot-button-container">
+                <a href="https://t.me/DyynamoBot" class="bot-interact-button">Interagir</a>
             </div>
         </div>
+      </div>
     </div>
 
     <div class="shopping-files-container">
