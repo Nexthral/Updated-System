@@ -452,7 +452,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra opcional */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra mais intensa para efeito 3D */
+    transform: perspective(1000px) rotateX(3deg) rotateY(3deg); /* Adiciona efeito 3D */
+    z-index: 10; /* Garante que o container fique acima dos outros elementos */
 }
 
 .game-icon {
@@ -479,7 +481,8 @@ body {
 .bottom-subtitle {
     font-size: 16px; /* Tamanho da fonte do subtítulo */
     color: #fff; /* Cor do subtítulo em branco */
-}
+    }
+    
     </style>
 </head>
 <body>
