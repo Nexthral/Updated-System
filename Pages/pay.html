@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paymants</title>
+    <style>
+        body {
+    background-color: #000; /* Fundo preto sólido */
+    color: #fff; /* Texto branco para contraste, se necessário */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+/* Impedir zoom */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+    position: relative;
+    user-select: none; /* Impede seleção de texto */
+    -webkit-user-select: none; /* Para navegadores baseados em WebKit */
+    -ms-user-select: none; /* Para o Internet Explorer/Edge */
+    touch-action: manipulation; /* Previne zoom em dispositivos touch */
+    overscroll-behavior: none; /* Previne "overscroll" */
+}
+
+/* Prevenir zoom ao fazer gesto de pinça ou toque duplo em dispositivos móveis */
+html, body {
+    touch-action: none;
+}
+
+/* Impedir cópia de conteúdo */
+body {
+    -webkit-touch-callout: none; /* Para iOS */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.currency-container {
+    position: absolute;
+    top: 20px; /* Ajuste a posição vertical */
+    left: 20px; /* Ajuste a posição horizontal */
+    display: flex;
+    align-items: center;
+}
+
+.currency-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Espaçamento entre os itens */
+    position: relative; /* Para o posicionamento do fundo circular de seleção */
+    cursor: pointer; /* Cursor em forma de mão ao passar sobre o item */
+}
+
+.currency-icon {
+    width: 25px; /* Ajuste o tamanho conforme necessário */
+    height: 25px; /* Ajuste o tamanho conforme necessário */
+    border-radius: 50%;
+    filter: none; /* Remove qualquer filtro aplicado */
+}
+
+.currency-text {
+    color: #fff; /* Cor do texto */
+    font-size: 16px; /* Tamanho do texto */
+    margin-left: 5px; /* Espaçamento entre a imagem e o texto */
+}
+
+.currency-item.selected::before {
+    content: '';
+    position: absolute;
+    top: -10px; /* Ajuste para o círculo de fundo ficar centralizado */
+    left: -10px; /* Ajuste para o círculo de fundo ficar centralizado */
+    width: calc(100% + 20px); /* Ajuste para o tamanho do círculo */
+    height: calc(100% + 20px); /* Ajuste para o tamanho do círculo */
+    background-color: #121212; /* Cor de fundo do círculo de seleção */
+    border-radius: 50%;
+    z-index: -1; /* Coloca o fundo atrás do item */
+    opacity: 0; /* Inicialmente invisível */
+    animation: fadeIn 0.5s ease-out forwards; /* Animação suave de entrada */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9); /* Começa menor */
+    }
+    to {
+        opacity: 1;
+        transform: scale(1); /* Tamanho final */
+    }
+}
+
+.off-icon {
+    position: absolute;
+    top: 20px; /* Ajuste a posição vertical */
+    right: 20px; /* Ajuste a posição horizontal */
+    width: 25px; /* Tamanho igual ao das bandeiras */
+    height: 25px; /* Tamanho igual ao das bandeiras */
+    z-index: 1; /* Garante que o ícone esteja sobre outros elementos */
+    cursor: pointer; /* Cursor em forma de mão ao passar sobre o ícone */
+}
+
+/* Container Saldo */
+.additional-container {
+    position: absolute;
+    top: 70px; /* Ajuste a posição vertical para aumentar o espaço acima */
+    left: 20px; /* Alinhamento horizontal com o cabeçalho */
+    width: calc(100% - 40px); /* Ajuste para preencher a largura disponível com margem */
+    height: 180px; /* Aumente a altura do container verticalmente */
+    background-image: url('img/wallpaper2.png'); /* Define a imagem de fundo */
+    background-size: cover; /* Ajusta a imagem para cobrir todo o container sem vazamentos */
+    background-position: center; /* Centraliza a imagem de fundo */
+    border-radius: 20px; /* Arredonda as pontas superiores e inferiores */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adiciona um efeito 3D com sombra */
+}
+
+.account-subtitle2 {
+    color: #fff; /* Cor do texto em branco */
+    font-size: 18px; /* Tamanho do texto, ajuste conforme necessário */
+    font-family: Arial, sans-serif; /* Fonte agradável */
+    font-weight: 600; /* Peso do texto como subtítulo */
+    margin-bottom: 10px; /* Espaço abaixo do subtítulo */
+    position: relative;
+    top: 10px;
+    left: 15px;
+}
+
+.currency-text2 {
+    color: #fff; /* Cor do texto em branco */
+    font-size: 24px; /* Tamanho do texto da moeda, ajuste conforme necessário */
+    font-family: Arial, sans-serif; /* Fonte agradável */
+    font-weight: 700; /* Negrito */
+    position: relative;
+    top: 20px;
+    left: 15px;
+}
+
+.username-display {
+    color: #FFA500; /* Cor laranja */
+    font-size: 18px; /* Tamanho do texto */
+    font-family: Arial, sans-serif; /* Fonte */
+    font-weight: 700; /* Negrito */
+    position: absolute;
+    top: 10px; /* Alinhado verticalmente com "Your account" */
+    right: 15px; /* Alinhado horizontalmente à direita */
+}
+
+/* Widget Recarga */
+.Recarga-container {
+    position: relative;
+    top: 130px;
+    right: 119px;
+    margin-top: 20px; /* Espaço entre o contêiner acima */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Recarga-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.Recarga-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Recarga-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+.Recarga-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Recarga-widget {
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Recarga-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+/* Widget Shopping */
+.Shopping-container {
+    position: relative;
+    top: 26px;
+    right: 38px;
+    margin-top: 20px; /* Espaço entre o contêiner acima */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Shopping-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.Shopping-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Shopping-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+.Shopping-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Shopping-widget {
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Shopping-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+/* Widget Dados */
+.Dados-container {
+    position: relative;
+    top: -77px;
+    right: -41px;
+    margin-top: 20px; /* Espaço entre o contêiner acima */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Dados-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.Dados-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Dados-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+.Dados-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Dados-widget {
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Dados-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+/* Widget Bot */
+.Bot-container {
+    position: relative;
+    top: -180px;
+    right: -120px;
+    margin-top: 20px; /* Espaço entre o contêiner acima */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Bot-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.Bot-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Bot-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+.Bot-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Bot-widget {
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Bot-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+/* Widget Help */
+.Help-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -160px;
+    right: 120px;
+}
+
+.Help-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Help-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Help-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.Help-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Help-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Container inferior */
+.game-container {
+    position: absolute;
+    top: 480px; /* Ajuste a posição vertical conforme necessário */
+    left: 20px; /* Alinhamento horizontal à esquerda */
+    height: 150px; /* Altura do container */
+    background-color: #121212; /* Fundo escuro */
+    border-radius: 20px; /* Arredonda as pontas superiores e inferiores */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adiciona um efeito 3D com sombra */
+    display: flex;
+    align-items: center; /* Alinha verticalmente o conteúdo */
+    padding: 15px; /* Espaçamento interno do container */
+    box-sizing: border-box; /* Inclui padding e borda na largura e altura do elemento */
+    width: calc(100% - 40px); /* Ajusta a largura do container para ocupar o espaço disponível */
+}
+
+.game-icon {
+    width: 250px; /* Ajuste o tamanho da imagem conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+    position: absolute;
+    left: -58px; /* Espaço da borda esquerda do container */
+    top: -25px;
+}
+
+.game-texts {
+    margin-left: 105px; /* Ajusta a margem para deixar espaço para a imagem */
+    font-family: 'Arial', sans-serif; /* Fonte do texto */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+.game-title {
+    font-size: 24px; /* Tamanho da fonte do título */
+    font-weight: bold; /* Negrito para o título */
+    margin-bottom: 10px; /* Espaço entre o título e o subtítulo */
+    color: orange;
+}
+
+.game-subtitle {
+    font-size: 16px; /* Tamanho da fonte do subtítulo */
+    color: #fff; /* Cor do subtítulo em branco */
+    font-family: Arial, sans-serif; /* Fonte agradável */
+}
+
+/* Rodapé */
+.footer-container {
+    position: fixed; /* Mantenha o rodapé fixo na parte inferior da página */
+    bottom: 40px; /* Distância da parte inferior da página */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Ajusta o alinhamento para centralizar o container */
+    max-width: 240px; /* Largura máxima ajustada */
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo branco transparente */
+    border-radius: 20px; /* Bordas arredondadas em todos os cantos */
+    padding: 10px; /* Espaço interno ajustado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra opcional */
+    text-align: center; /* Alinha o texto ao centro */
+    min-height: 40px; /* Altura mínima ajustada */
+    display: flex;
+    align-items: center; /* Centraliza verticalmente o conteúdo */
+    justify-content: space-around; /* Espaça os ícones horizontalmente com menor espaçamento */
+    transition: opacity 0.3s ease-in-out; /* Animação suave para ocultar e mostrar */
+    opacity: 1; /* Inicialmente visível */
+}
+
+.footer-container img {
+    width: 30px; /* Tamanho dos ícones */
+    height: 30px; /* Tamanho dos ícones */
+    margin: 0 8px; /* Espaço entre os ícones */
+    pointer-events
+}
+    </style>
+</head>
+<body>
+
+    <div class="currency-container">
+        <div class="currency-item" id="brasil">
+            <img src="img/brasil.png" alt="Ícone do Brasil" class="currency-icon">
+            <span class="currency-text">R$</span>
+        </div>
+        <div class="currency-item" id="usa">
+            <img src="img/usa.png" alt="Ícone dos EUA" class="currency-icon">
+            <span class="currency-text">$</span>
+        </div>
+    </div>
+
+    <img src="img/off.png" alt="Ícone Off" class="off-icon" id="toggle-icon">
+
+    <div class="additional-container">
+        <div class="account-subtitle2">Your account</div>
+        <div id="currency-text2" class="currency-text2">R$:</div>
+        <div class="username-display">Username</div>
+    </div>
+
+    <div class="shopping-files-container">
+        <div class="Recarga-container">
+            <a href="recarga.html" class="Recarga-link">
+                <div class="Recarga-widget">
+                    <img src="img/phone.png" alt="Recarga Icon" class="Recarga-icon">
+                </div>
+            </a>
+            <div class="Recarga-title">Recarga</div>
+        </div>
+
+        <div class="Shopping-container">
+            <a href="Shopping.html" class="Shopping-link">
+                <div class="Shopping-widget">
+                    <img src="img/shop.png" alt="Shopping Icon" class="Shopping-icon">
+                </div>
+            </a>
+            <div class="Shopping-title">Shopping</div>
+        </div>
+
+        <div class="Dados-container">
+            <a href="perfil.html" class="Dados-link">
+                <div class="Dados-widget">
+                    <img src="img/dados.png" alt="Dados Icon" class="Dados-icon">
+                </div>
+            </a>
+            <div class="Dados-title">Seus Dados</div>
+        </div>
+
+        <div class="Bot-container">
+            <a href="https://t.me/DyynamoBot" class="Bot-link">
+                <div class="Bot-widget">
+                    <img src="img/bot.png" alt="Bot Icon" class="Bot-icon">
+                </div>
+            </a>
+            <div class="Bot-title">Bot</div>
+        </div>
+
+        <div class="Help-container">
+            <a href="help.html" class="Help-link">
+                <div class="Help-widget">
+                    <img src="img/help2.png" alt="Help Icon" class="Help-icon">
+                </div>
+            </a>
+            <div class="Help-title">Help</div>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <img src="img/game2.png" alt="Ícone do jogo" class="game-icon">
+        <div class="game-texts">
+            <div class="game-title">O Jogo da Manipulação</div>
+            <div class="game-subtitle">você gasta anos de esforço apenas para acumular números ou um papel que logo perde valor.</div>
+        </div>
+    </div>
+
+    <div class="footer-container">
+        <a href="start.html">
+            <img src="img/home.png" alt="Home Icon">
+        </a>
+        <a href="group.html">
+            <img src="img/group.png" alt="Group Icon">
+        </a>
+        <a href="help.html">
+            <img src="img/help.png" alt="Help Icon">
+        </a>
+        <a href="settings.html">
+            <img src="img/settings.png" alt="Settings Icon">
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    // Constantes usadas
+    const userId = sessionStorage.getItem('userId');
+    const currencyTextElement = document.querySelector('.currency-text2');
+    const usernameElement = document.querySelector('.username-display');
+    const toggleIcon = document.getElementById('toggle-icon');
+
+    // Função para verificar se o usuário está autenticado
+    function checkAuthentication() {
+        if (!sessionStorage.getItem('userLoggedIn')) {
+            window.location.href = '../index.html'; // Caminho correto para index.html na raiz
+        }
+    }
+
+    // Função para atualizar a moeda e o nome de usuário
+    function updateCurrency() {
+        const selectedCurrencyElement = document.querySelector('.currency-item.selected .currency-text');
+        if (selectedCurrencyElement) {
+            const selectedCurrency = selectedCurrencyElement.innerText;
+
+            if (userId) {
+                fetch('https://nexthral.github.io/Updated-System/Pages/Data/dados.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const userData = data[userId];
+                        if (userData) {
+                            let balance = userData.BrightCoin;
+                            let username = userData.username;
+
+                            if (selectedCurrency === '$') {
+                                balance = (balance / 5.70).toFixed(2); // Conversão de BrightCoin para USD
+                            }
+
+                            // Verificar se o ícone está em estado off (censurado)
+                            if (toggleIcon.src.includes('off.png')) {
+                                currencyTextElement.innerText = `${selectedCurrency} **,**`;
+                                usernameElement.innerText = `${username.charAt(0)}*****`;
+                            } else {
+                                currencyTextElement.innerText = `${selectedCurrency} ${balance}`;
+                                usernameElement.innerText = username;
+                            }
+                        } else {
+                            currencyTextElement.innerText = 'Convidado';
+                            usernameElement.innerText = 'C*****';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching or processing data:', error);
+                        currencyTextElement.innerText = 'Convidado';
+                        usernameElement.innerText = 'C*****';
+                    });
+            } else {
+                currencyTextElement.innerText = 'Convidado';
+                usernameElement.innerText = 'C*****';
+            }
+        } else {
+            console.error('Elemento de moeda selecionada não encontrado');
+            currencyTextElement.innerText = 'Convidado';
+            usernameElement.innerText = 'C*****';
+        }
+    }
+
+    // Script para adicionar a seleção de moeda
+    document.querySelectorAll('.currency-item').forEach(item => {
+        item.addEventListener('click', () => {
+            document.querySelectorAll('.currency-item').forEach(i => i.classList.remove('selected'));
+            item.classList.add('selected');
+            updateCurrency();
+        });
+    });
+
+    // Defina Brasil como selecionado inicialmente
+    const brasilElement = document.getElementById('brasil');
+    if (brasilElement) {
+        brasilElement.classList.add('selected');
+        updateCurrency();
+    }
+
+    // Script para alternar entre off.png e on.png
+    toggleIcon.addEventListener('click', () => {
+        if (toggleIcon.src.includes('off.png')) {
+            toggleIcon.src = 'img/on.png';
+        } else {
+            toggleIcon.src = 'img/off.png';
+        }
+        updateCurrency(); // Atualiza a exibição ao alternar o ícone
+    });
+
+    // Chama a função para verificar a autenticação quando a página carrega
+    checkAuthentication();
+
+    // Adiciona a funcionalidade de remover e exibir o rodapé ao rolar
+    let lastScrollTop = 0;
+    const footer = document.querySelector('.footer-container');
+
+    window.addEventListener('scroll', function() {
+        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScroll > lastScrollTop) {
+            // Rolando para baixo
+            footer.style.opacity = '0'; // Torna o rodapé invisível
+            setTimeout(() => {
+                footer.style.display = 'none'; // Remove o rodapé da página após animação
+            }, 300); // Tempo da animação
+        } else {
+            // Rolando para cima
+            footer.style.display = 'flex'; // Adiciona o rodapé de volta à página
+            footer.style.opacity = '1'; // Torna o rodapé visível
+        }
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Para rolagem negativa
+    });
+});
+    </script>
+</body>
+</html>
