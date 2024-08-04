@@ -117,20 +117,18 @@ body {
 }
 
 .widget-inside-container {
-    position: absolute;
-    top: 18px; /* Distância do topo dentro do container */
-    left: 18px; /* Distância da esquerda dentro do container */
-    width: auto; /* Deixa a largura automática para acomodar o texto */
-    height: 110px; /* Altura do widget */
     display: flex;
-    align-items: center;
+    flex-direction: column; /* Organiza o conteúdo verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    width: 100%; /* Ocupa toda a largura disponível do container */
+    height: 100%; /* Ocupa toda a altura disponível do container */
 }
 
 .bot-text-container {
-    margin-left: 20px; /* Espaçamento entre o ícone e o texto */
+    text-align: center; /* Centraliza o texto dentro do container */
     color: #fff; /* Cor do texto branco */
     font-family: 'Arial', sans-serif; /* Fonte do texto */
-    text-align: center; /* Centraliza o texto */
 }
 
 .bot-title {
@@ -152,9 +150,7 @@ body {
 
 /* botão interativo */
 .bot-button-container {
-    position: relative;
-    margin-top: -5px;
-    top: 25px; /* Move o botão para baixo */
+    margin-top: 10px; /* Espaçamento entre o texto e o botão */
     display: flex;
     justify-content: center; /* Centraliza o botão */
 }
