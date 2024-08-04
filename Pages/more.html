@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More</title>
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Cor de fundo preto sólido */
+    color: #fff; /* Cor do texto branco para contraste */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px; /* Altura do cabeçalho */
+    background-color: #000; /* Cor de fundo do cabeçalho (opcional) */
+    width: 100%; /* Ocupa toda a largura da página */
+    top: 0; /* Posiciona no topo da página */
+    left: 0; /* Alinha à esquerda */
+}
+
+.back-button {
+    position: absolute;
+    top: 10px; /* Distância do topo */
+    left: 15px; /* Distância da esquerda */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-icon {
+    width: 30px; /* Tamanho do ícone (ajustável) */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+h1 {
+    color: #FFA500; /* Cor laranja */
+    font-weight: bold; /* Negrito */
+    font-size: 2rem; /* Tamanho da fonte (ajustável) */
+    margin: 0; /* Remove a margem padrão do h1 */
+    font-family: 'Arial', sans-serif; /* Fonte agradável */
+    position: relative; /* Permite o uso de ajustes de posicionamento */
+    top: -25px; /* Ajustado para a posição desejada */
+}
+
+.main-section {
+    margin-top: -20px; /* Espaço abaixo do cabeçalho para o título da seção */
+    padding: 0 15px; /* Espaço nas laterais */
+}
+
+.section-title {
+    color: #fff; /* Cor branca */
+    font-weight: bold; /* Negrito */
+    font-size: 1.5rem; /* Tamanho da fonte diminuído */
+    font-family: 'Arial', sans-serif; /* Fonte agradável */
+    text-align: left; /* Alinha o texto à esquerda, ajustável se necessário */
+}
+
+.section-divider {
+    border: 0;
+    height: 1px;
+    background-color: #FFA500; /* Cor laranja para combinar com o tema */
+    margin-top: -10px; /* Espaçamento entre o título e a linha */
+}
+
+/* Widget Home */
+.Home-container {
+    position: relative;
+    top: -10px;
+    right: 115px;
+    margin-top: 20px; /* Espaço entre o contêiner acima */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Home-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.Home-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Home-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+.Home-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Home-widget {
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Home-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+/* Widget Settings */
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -83px;
+    right: -80px;
+}
+
+.settings-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.settings-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.settings-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.settings-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.settings-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget Help */
+.Help-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -166px;
+    right: -160px;
+}
+
+.Help-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Help-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Help-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.Help-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Help-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widged Group */
+.Group-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -249px;
+    right: -238px;
+}
+
+.Group-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Group-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Group-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.Group-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Group-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget Bot */
+.Bot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -235px;
+    right: 0px;
+}
+
+.Bot-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Bot-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Bot-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.Bot-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Bot-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Seção Pagamentos */
+.payments-section {
+    margin-top: -240px; /* Espaço abaixo do cabeçalho para o título da seção */
+    padding: 0 15px; /* Espaço nas laterais */
+    position: relative;
+    left: 8px;
+}
+
+.s2-title {
+    color: #fff; /* Cor branca */
+    font-weight: bold; /* Negrito */
+    font-size: 1.5rem; /* Tamanho da fonte diminuído */
+    font-family: 'Arial', sans-serif; /* Fonte agradável */
+    text-align: left; /* Alinha o texto à esquerda, ajustável se necessário */
+}
+
+.s2-divider {
+    border: 0;
+    height: 1px;
+    background-color: #FFA500; /* Cor laranja para combinar com o tema */
+    margin: -10px 0 20px 0; /* Espaçamento acima e abaixo da linha */
+    width: calc(100% - -215px); /* Ajusta a largura da linha ao padding da seção */
+}
+
+/* Widget Shopping */
+.Shopping-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -10px;
+    right: 0px;
+}
+
+.Shopping-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Shopping-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Shopping-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.Shopping-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Shopping-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget Pay */
+.Pay-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -83px;
+    right: -80px;
+}
+
+.Pay-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Pay-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Pay-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.Pay-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Pay-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget AdReward */
+.Ads-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -83px;
+    right: -83px;
+}
+
+.Ads-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Ads-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Ads-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.Ads-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Ads-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Seção Files */
+.Files-section {
+    padding: 0 15px; /* Espaço nas laterais */
+    position: relative;
+    left: -175px;
+    top: 80px;
+}
+
+.s3-title {
+    color: #fff; /* Cor branca */
+    font-weight: bold; /* Negrito */
+    font-size: 1.5rem; /* Tamanho da fonte diminuído */
+    font-family: 'Arial', sans-serif; /* Fonte agradável */
+    text-align: left; /* Alinha o texto à esquerda, ajustável se necessário */
+}
+
+.s3-divider {
+    border: 0;
+    height: 1px;
+    background-color: #FFA500; /* Cor laranja para combinar com o tema */
+    margin: -10px 0 20px 0; /* Espaçamento acima e abaixo da linha */
+    width: calc(100% - -255px); /* Ajusta a largura da linha ao padding da seção */
+}
+
+/* Widget Files */
+.Files-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 35px;
+    left: -79px;
+}
+
+.Files-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Files-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Files-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.Files-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Files-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <a href="javascript:history.back()" class="back-button">
+            <img src="img/back.png" alt="Back" class="back-icon">
+        </a>
+        <h1>MORE</h1>
+    </header>
+    <section class="main-section">
+        <h2 class="section-title">Principais</h2>
+        <hr class="section-divider">
+    </section>
+        
+    <div class="shopping-files-container">
+        <div class="Home-container">
+            <a href="start.html" class="Home-link">
+                <div class="Home-widget">
+                    <img src="img/home2.png" alt="Shopping Icon" class="Home-icon">
+                </div>
+            </a>
+            <div class="Home-title">Home</div>
+            
+            <div class="settings-container">
+            <a href="settings.html" class="settings-link">
+                <div class="settings-widget">
+                    <img src="img/settings2.png" alt="settins Icon" class="settings-icon">
+                </div>
+            </a>
+            <div class="settings-title">Settings</div>
+        </div>
+        
+        <div class="Help-container">
+            <a href="help.html" class="Help-link">
+                <div class="Help-widget">
+                    <img src="img/help2.png" alt="Help Icon" class="Help-icon">
+                </div>
+            </a>
+            <div class="Help-title">Help</div>
+        </div>
+        
+        <div class="Group-container">
+            <a href="group.html" class="Group-link">
+                <div class="Group-widget">
+                    <img src="img/group2.png" alt="Group Icon" class="Group-icon">
+                </div>
+            </a>
+            <div class="Group-title">Group</div>
+        </div>
+        
+        <div class="Bot-container">
+            <a href="https://t.me/DyynamoBot" class="Bot-link">
+                <div class="Bot-widget">
+                    <img src="img/bot.png" alt="Bot Icon" class="Bot-icon">
+                </div>
+            </a>
+            <div class="Bot-title">Bot</div>
+        </div>
+        
+        <section class="payments-section">
+        <h2 class="s2-title">Pagamentos</h2>
+        <hr class="s2-divider">
+        </section>
+        
+        <div class="shopping-files-container">
+        <div class="Shopping-container">
+            <a href="shopping.html" class="Shopping-link">
+                <div class="Shopping-widget">
+                    <img src="img/shop.png" alt="Shopping Icon" class="Shopping-icon">
+                </div>
+            </a>
+            <div class="Shopping-title">Shopping</div>
+            
+            <div class="Pay-files-container">
+        <div class="Pay-container">
+            <a href="pay.html" class="Pay-link">
+                <div class="Pay-widget">
+                    <img src="img/pay.png" alt="Pay Icon" class="Pay-icon">
+                </div>
+            </a>
+            <div class="Pay-title">Pay</div>
+            
+            <div class="Ads-files-container">
+        <div class="Ads-container">
+            <a href="AdReward.html" class="Ads-link">
+                <div class="Ads-widget">
+                    <img src="img/ads.png" alt="Ads Icon" class="Ads-icon">
+                </div>
+            </a>
+            <div class="Ads-title">AdReward</div>
+            
+        <section class="Files-section">
+            <h2 class="s3-title">Arquivos</h2>
+            <hr class="s3-divider">
+        </section>
+        
+        <div class="Files-container">
+        <div class="Files-container">
+            <a href="Files.html" class="Files-link">
+                <div class="Files-widget">
+                    <img src="img/files.png" alt="Files Icon" class="Files-icon">
+                </div>
+                </a>
+            <div class="Files-title">Files</div>
+                
+         <script>
+    // script.js para start.html
+
+    // Função para verificar se o usuário está autenticado
+    function checkAuthentication() {
+        if (!sessionStorage.getItem('userLoggedIn')) {
+            window.location.href = '../index.html'; // Caminho correto para index.html na raiz
+        }
+    }
+
+    // Chama a função para verificar a autenticação quando a página carrega
+    document.addEventListener('DOMContentLoaded', checkAuthentication);
+</script>
+</body>
+</html>
