@@ -159,7 +159,7 @@ body {
 /* Widget Recarga */
 .Recarga-container {
     position: relative;
-    top: 120px;
+    top: 110px;
     right: 119px;
     margin-top: 20px; /* Espaço entre o contêiner acima */
     display: flex;
@@ -208,7 +208,7 @@ body {
 /* Widget Shopping */
 .Shopping-container {
     position: relative;
-    top: 16px;
+    top: 6px;
     right: 38px;
     margin-top: 20px; /* Espaço entre o contêiner acima */
     display: flex;
@@ -257,7 +257,7 @@ body {
 /* Widget Dados */
 .Dados-container {
     position: relative;
-    top: -72px;
+    top: -62px;
     right: -41px;
     margin-top: 20px; /* Espaço entre o contêiner acima */
     display: flex;
@@ -610,50 +610,24 @@ body {
         }
     }
 
-    // Função para salvar o estado atual no localStorage
-    function saveState(selectedCurrency, isCensored) {
-        localStorage.setItem('selectedCurrency', selectedCurrency);
-        localStorage.setItem('isCensored', isCensored ? 'true' : 'false');
-    }
-
-    // Função para carregar o estado salvo do localStorage
-    function loadState() {
-        const savedCurrency = localStorage.getItem('selectedCurrency');
-        const isCensored = localStorage.getItem('isCensored') === 'true';
-
-        // Recupera a moeda selecionada, se existir
-        if (savedCurrency) {
-            const savedCurrencyElement = [...document.querySelectorAll('.currency-item')].find(item => 
-                item.querySelector('.currency-text').innerText === savedCurrency
-            );
-            if (savedCurrencyElement) {
-                document.querySelectorAll('.currency-item').forEach(i => i.classList.remove('selected'));
-                savedCurrencyElement.classList.add('selected');
-            }
-        }
-
-        // Recupera o estado do ícone de censura
-        toggleIcon.src = isCensored ? 'img/off.png' : 'img/on.png';
-
-        return { selectedCurrency: savedCurrency || 'R$', isCensored };
-    }
-
     // Função para lidar com o clique no ícone de alternância (censura)
     function handleToggleIconClick() {
         // Verifica o estado atual do ícone (censurado ou não)
         const isCensored = toggleIcon.src.includes('off.png');
         toggleIcon.src = isCensored ? 'img/on.png' : 'img/off.png'; // Alterna a imagem do ícone
 
-        // Atualiza a exibição com os dados do usuário e o estado do ícone
+        // Obtém a moeda selecionada atualmente
         const selectedCurrencyElement = document.querySelector('.currency-item.selected .currency-text');
-        if (selectedCurrencyElement) {
-            const selectedCurrency = selectedCurrencyElement.innerText;
+        const selectedCurrency = selectedCurrencyElement ? selectedCurrencyElement.innerText : null;
 
+        if (selectedCurrency) {
+            // Atualiza a exibição com os dados do usuário e o estado do ícone
             fetchUserData().then(data => {
                 const userData = data ? data[userId] : null;
                 updateCurrency(userData, selectedCurrency, !isCensored);
-                saveState(selectedCurrency, !isCensored); // Salva o estado atualizado
             });
+        } else {
+            console.error('Elemento de moeda selecionada não encontrado');
         }
     }
 
@@ -662,57 +636,63 @@ body {
         // Adiciona evento de clique para cada item de moeda
         document.querySelectorAll('.currency-item').forEach(item => {
             item.addEventListener('click', () => {
-                // Remove a classe 'selected' de todas as moedas e adiciona à moeda clicada
                 document.querySelectorAll('.currency-item').forEach(i => i.classList.remove('selected'));
-                item.classList.add('selected');
+                item.classList.add('selected'); // Define a moeda como selecionada
+
+                const selectedCurrency = item.querySelector('.currency-text').innerText;
 
                 // Atualiza a exibição com os dados do usuário e a moeda selecionada
-                const selectedCurrency = item.querySelector('.currency-text').innerText;
                 fetchUserData().then(data => {
                     const userData = data ? data[userId] : null;
-                    updateCurrency(userData, selectedCurrency, toggleIcon.src.includes('off.png'));
-                    saveState(selectedCurrency, toggleIcon.src.includes('off.png')); // Salva o estado atualizado
+                    const isCensored = toggleIcon.src.includes('off.png');
+                    updateCurrency(userData, selectedCurrency, isCensored);
                 });
             });
         });
 
-        // Define Brasil como selecionado inicialmente ou carrega do estado salvo
-        const { selectedCurrency, isCensored } = loadState();
-        fetchUserData().then(data => {
-            const userData = data ? data[userId] : null;
-            updateCurrency(userData, selectedCurrency, isCensored);
+        // Define Brasil como a moeda selecionada inicialmente
+        const brasilElement = document.getElementById('brasil');
+        if (brasilElement) {
+            brasilElement.classList.add('selected');
+            const selectedCurrency = brasilElement.querySelector('.currency-text').innerText;
+
+            // Atualiza a exibição com os dados do usuário e a moeda selecionada
+            fetchUserData().then(data => {
+                const userData = data ? data[userId] : null;
+                const isCensored = toggleIcon.src.includes('off.png');
+                updateCurrency(userData, selectedCurrency, isCensored);
+            });
+        }
+    }
+
+    // Função para gerenciar a exibição do rodapé com base na rolagem da página
+    function initializeScrollBehavior() {
+        let lastScrollTop = 0;
+        const footer = document.querySelector('.footer-container');
+
+        window.addEventListener('scroll', function() {
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScroll > lastScrollTop) {
+                // Esconde o rodapé ao rolar para baixo
+                footer.style.opacity = '0';
+                setTimeout(() => {
+                    footer.style.display = 'none';
+                }, 300); // Tempo para a animação
+            } else {
+                // Exibe o rodapé ao rolar para cima
+                footer.style.display = 'flex';
+                footer.style.opacity = '1';
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Garante que a rolagem negativa seja tratada corretamente
         });
     }
 
-    // Chama a função para verificar a autenticação quando a página carrega
-    checkAuthentication();
-
-    // Inicializa a seleção de moeda e o estado do ícone de censura
-    initializeCurrencySelection();
-
-    // Adiciona evento de clique ao ícone de alternância
-    toggleIcon.addEventListener('click', handleToggleIconClick);
-
-    // Adiciona a funcionalidade de remover e exibir o rodapé ao rolar
-    let lastScrollTop = 0;
-    const footer = document.querySelector('.footer-container');
-
-    window.addEventListener('scroll', function() {
-        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (currentScroll > lastScrollTop) {
-            // Rolando para baixo
-            footer.style.opacity = '0'; // Torna o rodapé invisível
-            setTimeout(() => {
-                footer.style.display = 'none'; // Remove o rodapé da página após animação
-            }, 300); // Tempo da animação
-        } else {
-            // Rolando para cima
-            footer.style.display = 'flex'; // Adiciona o rodapé de volta à página
-            footer.style.opacity = '1'; // Torna o rodapé visível
-        }
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Para rolagem negativa
-    });
+    // Inicializa os eventos e funcionalidades ao carregar a página
+    toggleIcon.addEventListener('click', handleToggleIconClick); // Alternância do ícone de censura
+    checkAuthentication(); // Verifica se o usuário está autenticado
+    initializeCurrencySelection(); // Inicializa a seleção de moeda
+    initializeScrollBehavior(); // Inicializa o comportamento de rolagem do rodapé
 });
     </script>
 </body>
