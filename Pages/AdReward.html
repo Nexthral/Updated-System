@@ -3,45 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste de Anúncio AdSense</title>
+    <title>Teste de Anúncio AdMob</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-app-pub-6588463726292011",
+            enable_page_level_ads: true
+        });
+
+        function exibirAnuncio() {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    </script>
     <style>
-        /* Estilos básicos para layout */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 90%;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .ad-container {
-            margin: 20px 0;
+        /* Estilo para o botão personalizado */
+        #chamarAnuncio {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
             text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+            border: none;
+        }
+
+        /* Estilo para centralizar o conteúdo */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Teste de Anúncio AdSense</h1>
-        <p>Este é um exemplo de como adicionar anúncios do Google AdSense à sua página.</p>
-        
-        <!-- Container para o anúncio -->
-        <div class="ad-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-6588463726292011"
-                 data-ad-slot="1820557246"
-                 data-ad-format="auto"></ins>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6588463726292011"
-                    crossorigin="anonymous"></script>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        <p>Mais conteúdo pode ser adicionado aqui.</p>
-    </div>
+    <h1>Bem-vindo ao meu App</h1>
+    <p>Clique no botão abaixo para exibir o anúncio:</p>
+    
+    <!-- Botão para chamar o anúncio -->
+    <button id="chamarAnuncio" onclick="exibirAnuncio()">Chamar Anúncio</button>
+    
+    <!-- Container para o anúncio -->
+    <ins class="adsbygoogle"
+         style="display:none" <!-- O anúncio começa oculto -->
+         data-ad-client="ca-app-pub-6588463726292011"
+         data-ad-slot="2127253971"
+         data-ad-format="auto"></ins>
+
+    <script>
+        function exibirAnuncio() {
+            // Mostra o container do anúncio ao clicar no botão
+            var adContainer = document.querySelector('.adsbygoogle');
+            adContainer.style.display = 'block';
+
+            // Carrega o anúncio
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    </script>
 </body>
 </html>
