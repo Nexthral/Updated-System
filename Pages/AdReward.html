@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste de Anúncio AdMob</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-app-pub-6588463726292011",
-            enable_page_level_ads: true
-        });
-    </script>
     <style>
         /* Estilo para o botão personalizado */
         #chamarAnuncio {
@@ -36,6 +30,13 @@
             height: 100vh;
             margin: 0;
         }
+
+        /* Estilo para o contêiner do anúncio */
+        .ad-container {
+            width: 100%;
+            display: none; /* O anúncio começa oculto */
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -46,16 +47,18 @@
     <button id="chamarAnuncio" onclick="exibirAnuncio()">Chamar Anúncio</button>
     
     <!-- Container para o anúncio -->
-    <ins class="adsbygoogle"
-         style="display:none" <!-- O anúncio começa oculto -->
-         data-ad-client="ca-app-pub-6588463726292011"
-         data-ad-slot="2127253971"
-         data-ad-format="auto"></ins>
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-app-pub-6588463726292011"
+             data-ad-slot="2127253971"
+             data-ad-format="auto"></ins>
+    </div>
 
     <script>
         function exibirAnuncio() {
             // Mostra o container do anúncio ao clicar no botão
-            var adContainer = document.querySelector('.adsbygoogle');
+            var adContainer = document.querySelector('.ad-container');
             adContainer.style.display = 'block';
 
             // Carrega o anúncio
