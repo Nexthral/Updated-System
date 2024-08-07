@@ -524,6 +524,52 @@ h1 {
     font-size: 14px; /* Tamanho da fonte do título */
     text-align: center; /* Centraliza o texto */
 }
+
+/* Widget apps */
+.apps-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -42px;
+    left: 39px;
+}
+
+.apps-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.apps-widget {
+    width: 60px; /* Largura do widget */
+    height: 60px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.apps-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.apps-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.apps-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+        
     </style>
 </head>
 <body>
@@ -628,6 +674,15 @@ h1 {
                 </div>
                 </a>
             <div class="Files-title">Files</div>
+
+                <div class="apps-container">
+        <div class="apps-container">
+            <a href="apps.html" class="apps-link">
+                <div class="apps-widget">
+                    <img src="img/apps.png" alt="Apps Icon" class="apps-icon">
+                </div>
+                </a>
+            <div class="apps-title">Apps</div>
                 
          <script>
     // script.js para start.html
