@@ -3,50 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste de Anúncio AdMob Intersticial</title>
+    <title>Teste de Anúncios Infolinks</title>
     <style>
-        /* Estilo para o botão personalizado */
-        #chamarAnuncio {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 10px 2px;
-            cursor: pointer;
-            border-radius: 12px;
-            border: none;
-        }
-
-        /* Estilo para centralizar o conteúdo */
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+        }
+        .content {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        p {
+            margin: 15px 0;
         }
     </style>
+    <!-- Código do Infolinks -->
+    <script type="text/javascript"> 
+        var infolinks_pid = 3423810; 
+        var infolinks_wsid = 0; 
+    </script> 
+    <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
 </head>
 <body>
-    <h1>Bem-vindo ao meu App</h1>
-    <p>Clique no botão abaixo para exibir o anúncio:</p>
-    
-    <!-- Botão para chamar o anúncio -->
-    <button id="chamarAnuncio" onclick="chamarAnuncio()">Chamar Anúncio</button>
-
-    <script>
-        function chamarAnuncio() {
-            // Chama o método Java no WebView
-            if (window.JavaInterface && typeof window.JavaInterface.showInterstitialAd === 'function') {
-                window.JavaInterface.showInterstitialAd();
-            } else {
-                console.error('Interface Java não disponível.');
-            }
-        }
-    </script>
+    <div class="content">
+        <h1>Teste de Anúncios Infolinks</h1>
+        <p>
+            Este é um exemplo de página HTML para testar a integração de anúncios do Infolinks. 
+            O texto abaixo serve para ilustrar como os anúncios aparecerão em uma página real.
+        </p>
+        <p>
+            Adicione mais conteúdo aqui para ver como os anúncios são exibidos em diferentes contextos.
+        </p>
+        <p>
+            Continue navegando e observando como os anúncios se integram ao seu conteúdo.
+        </p>
+    </div>
 </body>
-</html>
+    </html>
