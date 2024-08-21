@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Marketplace</title>
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+
+body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, atualmente suportado pelo Chrome, Opera e Edge */
+}
+
+html, body {
+    overflow-x: hidden; /* Impede vazamentos horizontais */
+    margin: 0; /* Remove margens que possam causar deslocamento */
+    padding: 0; /* Remove padding que possa causar deslocamento */
+    width: 100vw; /* Garante que o conteúdo ocupe 100% da viewport */
+}
+
+/* Para garantir que elementos específicos não possam ser selecionados */
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+header {
+    height: 180px; /* Altura ajustada do cabeçalho */
+    position: relative;
+    overflow: hidden; /* Esconde qualquer conteúdo que saia dos limites do cabeçalho */
+    margin-top: 0px; /* Espaço para descer as imagens */
+    top: 0; /* Garante que esteja no topo da janela */
+    width: 100%;
+}
+
+.slider {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.3s ease-in-out; /* Transição suave ao deslizar */
+}
+
+.slides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.indicators {
+    position: absolute;
+    bottom: 10px; /* Posiciona os indicadores próximo ao rodapé do cabeçalho */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px; /* Espaço entre os pontos */
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #ffffff; /* Cor dos pontos inativos */
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.active {
+    background-color: #FFA500; /* Cor do ponto ativo (laranja) */
+}
+
+/* Voltar botão */
+.back-button {
+    position: absolute;
+    top: 10px; /* Distância do topo */
+    left: 15px; /* Distância da esquerda */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-icon {
+    width: 30px; /* Tamanho do ícone (ajustável) */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+/* Estilo para o widget */
+.Pay-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    position: relative;
+    left: -120px;
+}
+
+.Pay-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Pay-widget {
+    width: 50px; /* Largura do widget */
+    height: 50px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Pay-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.Pay-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Pay-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget Recarga */
+.Recarga-container {
+    position: relative;
+    top: -93px;
+    right: -77px;
+    margin-top: 20px; /* Espaço entre o contêiner acima */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Recarga-widget {
+    width: 50px; /* Largura do widget */
+    height: 50px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.Recarga-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Recarga-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+.Recarga-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Recarga-widget {
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Recarga-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+/* Widget Dados */
+.Dados-container {
+    position: relative;
+    top: -186px;
+    right: -155px;
+    margin-top: 20px; /* Espaço entre o contêiner acima */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Dados-widget {
+    width: 50px; /* Largura do widget */
+    height: 50px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.Dados-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Dados-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+.Dados-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Dados-widget {
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Dados-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+/* Widget Help */
+.Help-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -260px;
+    right: -230px;
+}
+
+.Help-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.Help-widget {
+    width: 50px; /* Largura do widget */
+    height: 50px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.Help-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.Help-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.Help-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget Balance */
+.portfolio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -240px;
+    right: 0px;
+}
+
+.portfolio-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.portfolio-widget {
+    width: 50px; /* Largura do widget */
+    height: 50px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.portfolio-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.portfolio-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.portfolio-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget Indisponível */
+.unavailable-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -313px;
+    right: 43px;
+}
+
+.unavailable-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.unavailable-widget {
+    width: 50px; /* Largura do widget */
+    height: 50px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.unavailable-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.unavailable-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.unavailable-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget Indisponível 2 */
+.unavailable2-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -388px;
+    right: -35px;
+}
+
+.unavailable2-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.unavailable2-widget {
+    width: 50px; /* Largura do widget */
+    height: 50px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.unavailable2-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.unavailable2-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.unavailable2-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Widget indisponível 3 */
+.unavailable3-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -462px;
+    right: -110px;
+}
+
+.unavailable3-link {
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.unavailable3-widget {
+    width: 50px; /* Largura do widget */
+    height: 50px; /* Altura do widget */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo com leve transparência */
+    border-radius: 10px; /* Bordas arredondadas disfarçadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transições suaves para transformações e sombras */
+}
+
+.unavailable3-widget:active {
+    transform: scale(0.95); /* Reduz levemente o tamanho ao ser clicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Diminui a sombra ao clicar */
+}
+
+.unavailable3-icon {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+}
+
+.unavailable3-title {
+    margin-top: 10px; /* Espaço entre o widget e o título */
+    color: #fff; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    font-size: 14px; /* Tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Estilos de Produtos */
+.featured-title {
+    color: orange;
+    font-weight: bold;
+    position: relative;
+    top: -240px; /* Ajusta a distância do conteúdo acima */
+    left: 10px; /* Alinha o texto à esquerda com 10px de margem */
+}
+
+/* Container Pai para os produtos em destaque */
+.featured-products-container {
+    display: flex;
+    justify-content: flex-start; /* Alinha os produtos à esquerda inicialmente */
+    align-items: flex-start;
+    flex-wrap: nowrap; /* Mantém os produtos em uma linha */
+    margin: 20px auto;
+    max-width: 100%; /* O container ocupa a largura total disponível */
+    position: relative;
+    left: 10x; /* Alinha o container 10px à esquerda */
+    top: -260px; /* Move o container para cima */
+    overflow-x: auto; /* Permite rolar horizontalmente */
+    scroll-behavior: smooth; /* Rolar suavemente ao usar a barra de rolagem */
+    white-space: nowrap; /* Impede que os produtos quebrem para uma nova linha */
+    margin-bottom: 10px;
+}
+
+/* Produtos */
+.product-container, .product2-container, .product3-container {
+    flex: 0 0 auto; /* Impede que os produtos se expandam e os mantém em seu tamanho original */
+}
+
+/* Primeiro Produto */
+.product-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-container {
+    width: 120px;
+    border: 1px solid #333;
+    padding: 8px;
+    margin: 10px;
+    text-align: center;
+    background-color: #0d0d0d;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.product-container:hover {
+    background-color: #1a1a1a;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 3px 0;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.price-quantity {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.product-price {
+    color: green;
+    font-size: 16px;
+    margin: 0;
+}
+
+.product-quantity {
+    font-size: 16px;
+    margin: 0;
+    color: #ffffff;
+}
+
+/* Segundo Produto */
+.product2-container {
+    width: 120px;
+    border: 1px solid #333;
+    padding: 8px;
+    margin: 10px;
+    text-align: center;
+    background-color: #0d0d0d;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.product2-container:hover {
+    background-color: #1a1a1a;
+}
+
+.product2-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0;
+}
+
+.product2-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product2-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 3px 0;
+}
+
+.price2-quantity {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product2-price {
+    color: green;
+    font-size: 16px;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.product2-quantity {
+    color: #ffffff;
+    font-size: 16px;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+/* Terceiro Produto */
+.product3-container {
+    width: 120px;
+    border: 1px solid #333;
+    padding: 8px;
+    margin: 10px;
+    text-align: center;
+    background-color: #0d0d0d;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.product3-container:hover {
+    background-color: #1a1a1a;
+}
+
+.product3-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0;
+}
+
+.product3-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product3-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 3px 0;
+}
+
+.price3-quantity {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product3-price {
+    color: green;
+    font-size: 16px;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.product3-quantity {
+    color: #ffffff;
+    font-size: 15px;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+/* Título dos Serviços */
+.featured-title2 {
+    color: orange;
+    font-weight: bold;
+    margin-left: 10px; /* Alinha o texto à esquerda com 10px de margem */
+    margin-top: -260px; /* Remove qualquer margem superior adicional */
+}
+
+/* Container Pai para os serviços */
+.featured-services-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    margin: 20px auto;
+    max-width: 100%;
+    position: relative;
+    left: 0px; /* Alinha o container à esquerda */
+    top: -20px; /* Ajusta a posição em relação ao título */
+    overflow-x: auto; /* Permite rolar horizontalmente */
+    scroll-behavior: smooth; /* Rolar suavemente ao usar a barra de rolagem */
+    white-space: nowrap; /* Impede que os produtos quebrem para uma nova linha */
+}
+
+/* Serviços*/
+.product-container, .product2-container, .product3-container {
+    flex: 0 0 auto; /* Impede que os produtos se expandam e os mantém em seu tamanho original */
+}
+
+/* Serviço */
+.service-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.service-container {
+    width: 120px;
+    border: 1px solid #333;
+    padding: 8px;
+    margin: 10px;
+    text-align: center;
+    background-color: #0d0d0d;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.service-container:hover {
+    background-color: #1a1a1a;
+}
+
+.service-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0;
+}
+
+.service-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 3px 0;
+}
+
+.service-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.price-quantity {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.service-price {
+    color: green;
+    font-size: 16px;
+    margin: 0;
+}
+
+.service-quantity {
+    font-size: 16px;
+    margin: 0;
+    color: #ffffff;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="slider">
+            <div class="slides">
+                <img src="img/marketplace.png" alt="Cabeçalho do Marketplace">
+                <img src="img/marketplace2.png" alt="Wallpaper">
+            </div>
+        </div>
+        <div class="indicators">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+        </div>
+    </header>
+    
+        <a href="javascript:history.back()" class="back-button">
+            <img src="img/back.png" alt="Back" class="back-icon">
+        </a>
+    
+        <!-- Adicionando o widget -->
+    <div class="Pay-files-container">
+        <div class="Pay-container">
+            <a href="pay.html" class="Pay-link">
+                <div class="Pay-widget">
+                    <img src="img/pay.png" alt="Pay Icon" class="Pay-icon">
+                </div>
+            </a>
+            <div class="Pay-title">Pay</div>
+            
+            <div class="shopping-files-container">
+        <div class="Recarga-container">
+            <a href="recarga.html" class="Recarga-link">
+                <div class="Recarga-widget">
+                    <img src="img/phone.png" alt="Recarga Icon" class="Recarga-icon">
+                </div>
+            </a>
+            <div class="Recarga-title">Recarga</div>
+        </div>
+        
+            <div class="Dados-container"> 
+            <a href="perfil.html" class="Dados-link">
+                <div class="Dados-widget">
+                    <img src="img/dados.png" alt="Dados Icon" class="Dados-icon">
+                </div>
+            </a>
+            <div class="Dados-title">Seus Dados</div>
+        </div>
+        
+            <div class="Help-container">
+            <a href="help.html" class="Help-link">
+                <div class="Help-widget">
+                    <img src="img/help2.png" alt="Help Icon" class="Help-icon">
+                </div>
+            </a>
+            <div class="Help-title">Help</div>
+        </div>
+    </div>
+    
+        <div class="portfolio-container">
+            <a href="balance.html" class="portfolio-link">
+                <div class="portfolio-widget">
+                    <img src="img/balance.png" alt="Balance Icon" class="portfolio-icon">
+                </div>
+            </a>
+            <div class="portfolio-title">Balance</div>
+        </div>
+    </div>
+    
+        <!-- Título para a seção de Produtos em Destaque -->
+<h2 class="featured-title">Produtos em Destaque</h2>
+
+        <div class="featured-products-container">
+    <!-- Primeiro produto em destaque -->
+    <a href="shop/p1.html" class="product-link">
+        <div class="product-container">
+            <img src="img/produto1.png" alt="Bot Telegram" class="product-image">
+            <div class="product-info">
+                <h3 class="product-name">Bot Telegram</h3>
+                <div class="price-quantity">
+                    <p class="product-price">R$ 19,99</p>
+                    <p class="product-quantity">Qty: 20</p>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Segundo produto em destaque -->
+    <a href="shop/p2.html" class="product-link">
+        <div class="product2-container">
+            <img src="img/produto2.png" alt="Aplicativo Externo" class="product2-image">
+            <div class="product2-info">
+                <h3 class="product2-name">Aplicativos</h3>
+                <div class="price2-quantity">
+                    <p class="product2-price">R$ 39,99</p>
+                    <p class="product2-quantity">Qty: 5</p>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Terceiro produto em destaque -->
+    <a href="shop/p3.html" class="product-link">
+        <div class="product3-container">
+            <img src="img/produto3.png" alt="Shell Base" class="product3-image">
+            <div class="product3-info">
+                <h3 class="product3-name">Shell Base</h3>
+                <div class="price3-quantity">
+                    <p class="product3-price">R$ 2,99</p>
+                    <p class="product3-quantity">Qty: 50</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    
+    <!-- Quarto produto em destaque -->
+    <a href="shop/p4.html" class="product-link">
+        <div class="product3-container">
+            <img src="img/produto4.png" alt="HTML Base" class="product3-image">
+            <div class="product3-info">
+                <h3 class="product3-name">HTML Base</h3>
+                <div class="price3-quantity">
+                    <p class="product3-price">R$ 1,99</p>
+                    <p class="product3-quantity">Qty: 50</p>
+                </div>
+            </div>
+        </div>
+     </a>
+ </div>
+  
+    <!-- Título dos Serviços -->
+<h2 class="featured-title2">Nossos Serviços</h2>
+
+        <div class="featured-services-container">
+    <!-- Primeiro serviço -->
+    <a href="shop/s1.html" class="service-link">
+        <div class="service-container">
+            <img src="img/servicos.png" alt="Python" class="service-image">
+            <div class="service-info">
+                <h3 class="service-name">Python</h3>
+                <div class="price-quantity">
+                    <p class="service-price">R$ 39,99</p>
+                    <p class="service-quantity">Qty: 2</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    
+            <!-- Segundo serviço -->
+    <a href="shop/s2.html" class="service-link">
+        <div class="service-container">
+            <img src="img/servicos2.png" alt="Serviço 2" class="service-image">
+            <div class="service-info">
+                <h3 class="service-name">HTML + CSS</h3>
+                <div class="price-quantity">
+                    <p class="service-price">R$ 14,99</p>
+                    <p class="service-quantity">Qty: 2</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    
+            <!-- Terceiro serviço -->
+    <a href="shop/s3.html" class="service-link">
+        <div class="service-container">
+            <img src="img/servicos3.png" alt="Serviço 2" class="service-image">
+            <div class="service-info">
+                <h3 class="service-name">JavaScript</h3>
+                <div class="price-quantity">
+                    <p class="service-price">R$ 19,99</p>
+                    <p class="service-quantity">Qty: 2</p>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+    <script>
+        // Função para verificar se o usuário está autenticado
+    function checkAuthentication() {
+        if (!sessionStorage.getItem('userLoggedIn')) {
+            window.location.href = '../index.html'; // Caminho correto para index.html na raiz
+        }
+    }
+    
+        // Chama a função para verificar a autenticação quando a página carrega
+    document.addEventListener('DOMContentLoaded', checkAuthentication);
+    
+        let currentIndex = 0;
+const slides = document.querySelector('.slides');
+const totalSlides = document.querySelectorAll('.slides img').length;
+const dots = document.querySelectorAll('.dot');
+
+document.querySelector('.slider').addEventListener('touchstart', handleTouchStart, false);
+document.querySelector('.slider').addEventListener('touchmove', handleTouchMove, false);
+
+// Adiciona suporte para navegação com o mouse (opcional)
+document.querySelector('.slider').addEventListener('mousedown', handleMouseDown, false);
+document.querySelector('.slider').addEventListener('mousemove', handleMouseMove, false);
+document.querySelector('.slider').addEventListener('mouseup', handleMouseUp, false);
+
+let x1 = null;
+let isMouseDown = false;
+
+function handleTouchStart(evt) {
+    x1 = evt.touches[0].clientX;
+    evt.preventDefault(); // Previne o comportamento de rolagem padrão
+}
+
+function handleTouchMove(evt) {
+    if (!x1) {
+        return;
+    }
+
+    let x2 = evt.touches[0].clientX;
+    let xDiff = x2 - x1;
+
+    if (Math.abs(xDiff) > 20) { // Adiciona uma pequena tolerância para evitar deslizamentos acidentais
+        slideTo(xDiff > 0 ? 'left' : 'right');
+        x1 = null; // Reseta a posição inicial para evitar múltiplos deslizamentos
+    }
+    
+    evt.preventDefault(); // Previne o comportamento de rolagem padrão
+}
+
+function handleMouseDown(evt) {
+    x1 = evt.clientX;
+    isMouseDown = true;
+}
+
+function handleMouseMove(evt) {
+    if (!isMouseDown) {
+        return;
+    }
+
+    let x2 = evt.clientX;
+    let xDiff = x2 - x1;
+
+    if (Math.abs(xDiff) > 20) { // Adiciona uma pequena tolerância para evitar deslizamentos acidentais
+        slideTo(xDiff > 0 ? 'left' : 'right');
+        x1 = null; // Reseta a posição inicial para evitar múltiplos deslizamentos
+        isMouseDown = false; // Finaliza o arraste
+    }
+}
+
+function handleMouseUp(evt) {
+    isMouseDown = false;
+}
+
+function slideTo(direction) {
+    if (direction === 'left') {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 1;
+    } else if (direction === 'right') {
+        currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
+    }
+
+    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    updateDots();
+}
+
+function updateDots() {
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+    });
+}
+
+    </script>
+</body>
+</html>
